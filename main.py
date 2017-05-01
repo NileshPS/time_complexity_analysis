@@ -8,13 +8,14 @@ import matplotlib.pyplot as plt
 import boost
 
 
-# Refer the either the function using native implementation or the optimized one.
+# Refers either the function using native implementation or the optimized one.
+# Set as per the command line argument.
 FUNC_INVERSION_COUNT = None
-# Length of each test case
+# Length of each test case.
 N = np.array([10,   20,   50,   100,  200,  500,  750,   1000,  1500,  2000,  2500,  3000,  3500, 
               4000, 5000, 6000, 7000, 8000, 9000, 10000, 12000, 15000, 20000, 50000, 75000, 90000, 100000], dtype=np.int64);
 
-
+# Wrapper function to be passed to timeit.
 def wrapper(func, *args, **kwargs):
     def __func__():
         return func(*args, *kwargs)
@@ -25,7 +26,7 @@ def main():
     arr = np.array( N.max(), dtype = np.int64)
     j = 0
     for n in N:
-       # Generate n random numbers.
+        # Generate n random numbers.
         arr = np.zeros(n, dtype=np.int64)
         print("Input size of  %-6d   took " % n, end = '')
         for i in range(0, n):
@@ -35,7 +36,6 @@ def main():
         print(" %f seconds !" % span)
         time_taken[j] = span
         j += 1
-        #time_native.append(span_native)
     # Plot the graph.
     plt.xlabel('Input size')
     plt.ylabel('Time Taken')
@@ -49,7 +49,7 @@ def main():
 
 
 def help():
-    print("Usage : ./main.py [-n | -o ]")
+    print("Usage : ./main.py ( -n | -o )")
 
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
